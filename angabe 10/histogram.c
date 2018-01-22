@@ -1,38 +1,31 @@
 #include <stdio.h>
-int lon;
-unsigned readIntArray (int a[], int l);
-void printIntArray (int a[], int l);
+void readIntArray ();
 int main (void)
 {
-	printf("n: \n");
-	scanf("%hhu",&lon);
-    int a[lon];
-    readIntArray(a, lon);
-    printIntArray(a, lon);
+    readIntArray();
     return 0;
 }
-unsigned readIntArray(int alpha[], int l)
+void readIntArray()
 {
     int i;
     int num;
-    l=10;
+    int l;
+    printf("l: ");
+    scanf("%d",&l);
+    unsigned char alpha[l];
     for (i = 0; i < l;i++)
     {
         printf("Eingabe Komponente mit Index %d von i: ", i);
-        scanf("%d",&num);
+        scanf("%hhu",&num);
         alpha[i]=num;
     }
-}
-void printIntArray(int alpha[], int l)
-{
     int lv;
     int c;
-    l=10;
     for (lv =0; lv<l; lv++)
     {
-        printf("\ni [%d] hat den Wert: %d\t", lv, alpha[lv]);
+        printf("\n%d : %hhu\t|", lv, alpha[lv]);
         for (c=0;c<alpha[lv]; c++){
-        	printf("*");
+            printf("*");
         }
 
     }

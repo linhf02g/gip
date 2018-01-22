@@ -1,45 +1,53 @@
-#include <stdio.h>
-#include <math.h>
-int convertDecimalToBinary(int n);
-int convertBinaryToDecimal(int m);
-
+#include<stdio.h>
+#include<stdlib.h>
+int c=0;
+int binarysearch(int *,int,int);
+int binarysearch(int *a,int m,int n)
+{
+ 
+    int l,u,mid;
+l=0,u=n-1;
+    while(l<=u)
+        {
+         mid=(l+u)/2;
+         if(m==a[mid])
+            {
+             c=1;
+             return mid;
+         }
+         else if(m<a[mid])
+            {
+             u=mid-1;
+         }
+         else
+             l=mid+1;
+    }
+    return -1;
+}
 int main()
 {
-    int n;
-    printf("Enter a decimal number: ");
-    scanf("%d", &n);
-    printf("%d in decimal = %d in binary\n", n, convertDecimalToBinary(n));
-    long long m;
-    printf("Enter a binary number: ");
-    scanf("%lld", &m);
-    printf("%lld in binary = %d in decimal\n", m, convertBinaryToDecimal(m));
+ 
+    int *a,i,n,m,pos;
+ 
+    printf("Geben Sie die Laenge der Reihung ein: ");
+    scanf("%d",&n);
+        a=(int*)malloc(n*sizeof(int));
+ 
+    printf("Geben Sie die Zahlen in der Reihung: ");
+    for(i=0;i<n;i++)
+        {
+         scanf("%d",(a+i));
+    }
+ 
+    printf("Nummer, um zu suchen: ");
+    scanf("%d",&m);
+        pos=binarysearch(a,m,n);
+ 
+     
+    if(c==0)
+         printf("Es gibt keine Zahl, die die Bedingung efuellt\n");
+    else
+         printf("Die Zahl ist an der Position %d\n",pos);
+ 
     return 0;
-}
-
-int convertDecimalToBinary(int n)
-{
-    int binaryNumber = 0;
-    int remainder, i = 1, step = 1;
-
-    while (n!=0)
-    {
-        remainder = n%2;
-        n /= 2;
-        binaryNumber += remainder*i;
-        i *= 10;
-    }
-    return binaryNumber;
-}
-
-int convertBinaryToDecimal(int m)
-{
-    int decimalNumber = 0, i = 0, remainder;
-    while (m!=0)
-    {
-        remainder = m%10;
-        m /= 10;
-        decimalNumber += remainder*pow(2,i);
-        ++i;
-    }
-    return decimalNumber;
 }
