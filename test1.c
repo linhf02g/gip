@@ -1,53 +1,59 @@
+
 #include<stdio.h>
 #include<stdlib.h>
-int c=0;
-int binarysearch(int *,int,int);
-int binarysearch(int *a,int m,int n)
-{
- 
-    int l,u,mid;
-l=0,u=n-1;
-    while(l<=u)
-        {
-         mid=(l+u)/2;
-         if(m==a[mid])
-            {
-             c=1;
-             return mid;
-         }
-         else if(m<a[mid])
-            {
-             u=mid-1;
-         }
-         else
-             l=mid+1;
+
+struct dnode{
+    int data;
+    struct dnode *next;
+    struct dnode *prev;
+};
+struct dnode *mkNode(int val){
+    struct dnode *node = NULL;
+    if((node = malloc(sizeof (struct dnode))) != NULL){
+        node->data = val; node->next=node->prev = NULL;
+        return node;
     }
-    return -1;
+    else {return NULL;
+    }
 }
-int main()
-{
- 
-    int *a,i,n,m,pos;
- 
-    printf("Geben Sie die Laenge der Reihung ein: ");
-    scanf("%d",&n);
-        a=(int*)malloc(n*sizeof(int));
- 
-    printf("Geben Sie die Zahlen in der Reihung: ");
-    for(i=0;i<n;i++)
-        {
-         scanf("%d",(a+i));
+struct dnode *head, *last;
+void insertFirst(int x) {
+    struct dnode *node = mkNode(x);
+    if(head == NULL) {
+        head = node;
+        return;
     }
- 
-    printf("Nummer, um zu suchen: ");
-    scanf("%d",&m);
-        pos=binarysearch(a,m,n);
- 
-     
-    if(c==0)
-         printf("Es gibt keine Zahl, die die Bedingung efuellt\n");
-    else
-         printf("Die Zahl ist an der Position %d\n",pos);
- 
+    head->prev = node;
+    node->next = head; 
+    head = node;
+}
+ // erstes und letztes Listenelement
+void printInverse(void)
+{
+    if(head == NULL){
+        printf("( )");
+        return;
+    }
+    printf("(");
+    struct dnode *tmp = last; // ans Ende der Liste gehen
+    while(tmp != NULL){
+        printf("%d", tmp->data);
+        tmp = tmp->prev;
+    }
+    printf(")");
+ }
+ int main(int argc, char const *argv[])
+{
+    int n;
+    printf("\nnhap so phan tu:");
+    scanf("%d",&n);
+    for(int i = 0; i<n;i++)
+    {
+        int x;
+        printf("\nnhap vao so lieu:");
+        scanf("%d",&x);
+        insertFirst(x);
+    }    
+    printInverse();
     return 0;
 }

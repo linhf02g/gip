@@ -1,7 +1,5 @@
 #include<stdio.h>
- 
 int f(int);
- 
 int main()
 {
    int n, i = 0, c;
@@ -16,10 +14,8 @@ int main()
       printf("%d\n", f(i));
       i++; 
    }
- 
    return 0;
 }
- 
 int f(int n)
 {
    if ( n == 0 )

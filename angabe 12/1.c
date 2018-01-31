@@ -4,7 +4,6 @@
 struct node {
     int data;
     struct node *next;
-    struct Node *prev;
 };
 struct node *mkNode(int val){
     struct node *node = NULL;
@@ -58,17 +57,7 @@ struct node *reverse (struct node *head)
        head->next = reverse(next); 
     return prev;
 }
-void delete (int val) {
-    struct node *p = head, *prev = NULL;
-    while (p != NULL && p->data != val) {
-        prev = p; p = p->next;
-        } // p == NULL || p->data == val
-    if (p != NULL) { // p->data == val
-        if (p == head) head = p->next;
-        else prev->next = p->next;
-        free(p);
-    }
-}
+
 int main(int argc, char const *argv[])
 {
     int n;
@@ -83,11 +72,6 @@ int main(int argc, char const *argv[])
     }    
     printList();
     head = reverse(head);
-    printList();
-    int xoa;
-    printf("nhap so can xoa: \n");
-    scanf("%d",&xoa);
-    delete(xoa);
     printList();
     return 0;
 }
